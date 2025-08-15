@@ -1,0 +1,15 @@
+name: ip2location
+description: A Dart library for querying IP geolocation information using the IP2Location database.
+version: 8.0.0
+repository: https://github.com/ip2location/ip2location-dart
+
+environment:
+  sdk: '>=3.8.2 <4.0.0'
+
+dependencies:
+  synchronized: ^3.0.0
+  csv: ^6.0.0
+
+dev_dependencies:
+  lints: ^6.0.0
+  test: ^1.24.0
