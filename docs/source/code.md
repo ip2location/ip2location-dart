@@ -142,7 +142,7 @@ Compress a IPv6 to shorten the length.
 :rtype: String
 ```
 
-```{py:function} ExpandIPv6(ip)
+```{py:function} expandIPv6(ip)
 Expand a compressed IPv6 to full length.
 
 :param String ip: (Required) IPv6 address.
