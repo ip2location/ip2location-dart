@@ -1,4 +1,4 @@
-![Pub Publisher](https://img.shields.io/pub/publisher/ip2location)
+[![pub package](https://img.shields.io/pub/v/ip2location.svg)](https://pub.dev/packages/ip2location)
 
 # IP2Location Dart Package
 
