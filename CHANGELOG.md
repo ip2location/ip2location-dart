@@ -1,3 +1,9 @@
+## 8.0.1
+
+**Released on:** 2025-08-22
+
+- Fixed expected error messages in tests.
+
 ## 8.0.0
 
 **Released on:** 2025-08-15
