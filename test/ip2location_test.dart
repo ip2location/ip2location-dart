@@ -2,7 +2,8 @@ import 'package:ip2location/ip2location.dart';
 import 'package:test/test.dart';
 
 void main() {
-  var notSupported = 'This parameter is unavailable for selected data file. Please upgrade the data file.';
+  var notSupported =
+      'This parameter is unavailable for selected data file. Please upgrade the data file.';
   var db26IPv4File =
       r'C:\your_folder\IP-COUNTRY-REGION-CITY-LATITUDE-LONGITUDE-ZIPCODE-TIMEZONE-ISP-DOMAIN-NETSPEED-AREACODE-WEATHER-MOBILE-ELEVATION-USAGETYPE-ADDRESSTYPE-CATEGORY-DISTRICT-ASN.BIN';
   var db26IPv6File =
@@ -17,10 +18,10 @@ void main() {
       expect(result.region, 'California');
       expect(result.city, 'Mountain View');
       expect(result.isp, 'Google LLC');
-      expect(result.latitude?.toStringAsFixed(6), '37.405991');
-      expect(result.longitude?.toStringAsFixed(6), '-122.078514');
+      expect(result.latitude?.toStringAsFixed(6), '37.386051');
+      expect(result.longitude?.toStringAsFixed(6), '-122.083847');
       expect(result.domain, 'google.com');
-      expect(result.zipCode, '94043');
+      expect(result.zipCode, '94035');
       expect(result.netSpeed, 'T1');
       expect(result.timeZone, '-07:00');
       expect(result.iddCode, '1');
@@ -34,9 +35,12 @@ void main() {
       expect(result.usageType, 'DCH');
       expect(result.addressType, 'A');
       expect(result.category, 'IAB19-11');
-      expect(result.district, 'San Diego County');
+      expect(result.district, 'Santa Clara County');
       expect(result.asn, '15169');
       expect(result.asName, 'Google LLC');
+      expect(result.asDomain, 'google.com');
+      expect(result.asUsageType, 'DCH');
+      expect(result.asCIDR, '8.8.8.0/24');
     });
     test('Normal IPv4 MY', () async {
       var ipl = IP2Location(databasePath: db26IPv4File);
@@ -45,18 +49,18 @@ void main() {
       expect(result.countryShort, 'MY');
       expect(result.countryLong, 'Malaysia');
       expect(result.region, 'Pulau Pinang');
-      expect(result.city, 'George Town');
+      expect(result.city, 'Bayan Lepas');
       expect(result.isp, 'Telekom Malaysia Berhad');
-      expect(result.latitude?.toStringAsFixed(6), '5.411460');
-      expect(result.longitude?.toStringAsFixed(6), '100.335426');
+      expect(result.latitude?.toStringAsFixed(6), '5.283333');
+      expect(result.longitude?.toStringAsFixed(6), '100.266670');
       expect(result.domain, 'tm.net.my');
-      expect(result.zipCode, '10300');
+      expect(result.zipCode, '11900');
       expect(result.netSpeed, 'DSL');
       expect(result.timeZone, '+08:00');
       expect(result.iddCode, '60');
       expect(result.areaCode, '04');
-      expect(result.weatherStationCode, 'MYXX0002');
-      expect(result.weatherStationName, 'George Town');
+      expect(result.weatherStationCode, 'MYXX0022');
+      expect(result.weatherStationName, 'Penang/Bayan Lepas');
       expect(result.mcc, '-');
       expect(result.mnc, '-');
       expect(result.mobileBrand, '-');
@@ -64,9 +68,12 @@ void main() {
       expect(result.usageType, 'ISP');
       expect(result.addressType, 'U');
       expect(result.category, 'IAB19-18');
-      expect(result.district, 'Daerah Timur Laut');
+      expect(result.district, 'Barat Daya');
       expect(result.asn, '4788');
-      expect(result.asName, 'Telekom Malaysia Berhad');
+      expect(result.asName, 'TM Technology Services Sdn. Bhd.');
+      expect(result.asDomain, 'webe.com.my');
+      expect(result.asUsageType, 'ISP');
+      expect(result.asCIDR, '175.144.128.0/18');
     });
   }, skip: 'Skipping Normal IPv4 tests first.');
   group('Test Normal IPv6', () {
@@ -84,7 +91,7 @@ void main() {
       expect(result.domain, 'google.com');
       expect(result.zipCode, '2000');
       expect(result.netSpeed, 'T1');
-      expect(result.timeZone, '+11:00');
+      expect(result.timeZone, '+10:00');
       expect(result.iddCode, '61');
       expect(result.areaCode, '02');
       expect(result.weatherStationCode, 'ASXX0112');
@@ -96,9 +103,12 @@ void main() {
       expect(result.usageType, 'DCH');
       expect(result.addressType, 'U');
       expect(result.category, 'IAB19-11');
-      expect(result.district, '-');
+      expect(result.district, 'City of Sydney');
       expect(result.asn, '15169');
       expect(result.asName, 'Google LLC');
+      expect(result.asDomain, 'google.com');
+      expect(result.asUsageType, 'DCH');
+      expect(result.asCIDR, '2404:6800:4001::/48');
     });
     test('Normal IPv6 DE', () async {
       var ipl = IP2Location(databasePath: db26IPv6File);
@@ -129,6 +139,9 @@ void main() {
       expect(result.district, 'Regierungsbezirk Darmstadt');
       expect(result.asn, '14061');
       expect(result.asName, 'DigitalOcean LLC');
+      expect(result.asDomain, 'digitalocean.com');
+      expect(result.asUsageType, 'DCH');
+      expect(result.asCIDR, '2a03:b0c0:2::/48');
     });
   }, skip: 'Skipping Normal IPv6 tests first.');
   group('Test IPv4-Mapped IPv6', () {
@@ -157,10 +170,13 @@ void main() {
       expect(result.elevation, 24.0);
       expect(result.usageType, 'DCH');
       expect(result.addressType, 'U');
-      expect(result.category, 'IAB19');
+      expect(result.category, 'IAB19-11');
       expect(result.district, 'City of Cape Town');
-      expect(result.asn, '10474');
-      expect(result.asName, 'African Network Information Center');
+      expect(result.asn, '3741');
+      expect(result.asName, 'Dimension Data');
+      expect(result.asDomain, 'dimensiondata.com');
+      expect(result.asUsageType, 'DCH');
+      expect(result.asCIDR, '197.85.190.0/23');
     });
     test('IPv4-Mapped IPv6 US', () async {
       var ipl = IP2Location(databasePath: db26IPv4File);
@@ -169,28 +185,31 @@ void main() {
       expect(result.countryShort, 'US');
       expect(result.countryLong, 'United States of America');
       expect(result.region, 'Florida');
-      expect(result.city, 'Hialeah');
+      expect(result.city, 'Miami');
       expect(result.isp, 'zipdata.net');
-      expect(result.latitude?.toStringAsFixed(6), '25.942320');
-      expect(result.longitude?.toStringAsFixed(6), '-80.390404');
+      expect(result.latitude?.toStringAsFixed(6), '25.774269');
+      expect(result.longitude?.toStringAsFixed(6), '-80.193604');
       expect(result.domain, 'zipdata.net');
-      expect(result.zipCode, '33018');
+      expect(result.zipCode, '33101');
       expect(result.netSpeed, 'T1');
       expect(result.timeZone, '-04:00');
       expect(result.iddCode, '1');
-      expect(result.areaCode, '305');
-      expect(result.weatherStationCode, 'USFL0196');
-      expect(result.weatherStationName, 'Hialeah');
+      expect(result.areaCode, '305/786');
+      expect(result.weatherStationCode, 'USFL0316');
+      expect(result.weatherStationName, 'Miami');
       expect(result.mcc, '-');
       expect(result.mnc, '-');
       expect(result.mobileBrand, '-');
-      expect(result.elevation, 1.0);
+      expect(result.elevation, 2.0);
       expect(result.usageType, 'DCH');
       expect(result.addressType, 'U');
       expect(result.category, 'IAB19-11');
       expect(result.district, 'Miami-Dade County');
       expect(result.asn, '395951');
       expect(result.asName, 'zipdata.net');
+      expect(result.asDomain, 'zipdata.net');
+      expect(result.asUsageType, 'DCH');
+      expect(result.asCIDR, '64.94.62.0/24');
     });
   }, skip: 'Skipping IPv4-mapped IPv6 tests first.');
   group('Test Teredo', () {
@@ -203,8 +222,8 @@ void main() {
       expect(result.region, 'California');
       expect(result.city, 'Sunnyvale');
       expect(result.isp, 'Yahoo! Inc.');
-      expect(result.latitude?.toStringAsFixed(6), '37.401245');
-      expect(result.longitude?.toStringAsFixed(6), '-122.007523');
+      expect(result.latitude?.toStringAsFixed(6), '37.368832');
+      expect(result.longitude?.toStringAsFixed(6), '-122.036148');
       expect(result.domain, 'yahoo.com');
       expect(result.zipCode, '94089');
       expect(result.netSpeed, 'T1');
@@ -221,8 +240,11 @@ void main() {
       expect(result.addressType, 'U');
       expect(result.category, 'IAB19-11');
       expect(result.district, 'Santa Clara County');
-      expect(result.asn, '3356');
+      expect(result.asn, '1');
       expect(result.asName, 'Level 3 Parent LLC');
+      expect(result.asDomain, 'level3.com');
+      expect(result.asUsageType, 'ISP');
+      expect(result.asCIDR, '8.3.32.0/20');
     });
     test('Teredo Google', () async {
       var ipl = IP2Location(databasePath: db26IPv4File);
@@ -233,10 +255,10 @@ void main() {
       expect(result.region, 'California');
       expect(result.city, 'Mountain View');
       expect(result.isp, 'Google LLC');
-      expect(result.latitude?.toStringAsFixed(6), '37.405991');
-      expect(result.longitude?.toStringAsFixed(6), '-122.078514');
+      expect(result.latitude?.toStringAsFixed(6), '37.386051');
+      expect(result.longitude?.toStringAsFixed(6), '-122.083847');
       expect(result.domain, 'google.com');
-      expect(result.zipCode, '94043');
+      expect(result.zipCode, '94035');
       expect(result.netSpeed, 'T1');
       expect(result.timeZone, '-07:00');
       expect(result.iddCode, '1');
@@ -250,9 +272,12 @@ void main() {
       expect(result.usageType, 'DCH');
       expect(result.addressType, 'A');
       expect(result.category, 'IAB19-11');
-      expect(result.district, 'San Diego County');
+      expect(result.district, 'Santa Clara County');
       expect(result.asn, '15169');
       expect(result.asName, 'Google LLC');
+      expect(result.asDomain, 'google.com');
+      expect(result.asUsageType, 'DCH');
+      expect(result.asCIDR, '8.8.8.0/24');
     });
   }, skip: 'Skipping Teredo tests first.');
   group('Test 6to4', () {
@@ -265,8 +290,8 @@ void main() {
       expect(result.region, 'California');
       expect(result.city, 'Sunnyvale');
       expect(result.isp, 'Yahoo! Inc.');
-      expect(result.latitude?.toStringAsFixed(6), '37.401245');
-      expect(result.longitude?.toStringAsFixed(6), '-122.007523');
+      expect(result.latitude?.toStringAsFixed(6), '37.368832');
+      expect(result.longitude?.toStringAsFixed(6), '-122.036148');
       expect(result.domain, 'yahoo.com');
       expect(result.zipCode, '94089');
       expect(result.netSpeed, 'T1');
@@ -283,8 +308,11 @@ void main() {
       expect(result.addressType, 'U');
       expect(result.category, 'IAB19-11');
       expect(result.district, 'Santa Clara County');
-      expect(result.asn, '3356');
+      expect(result.asn, '1');
       expect(result.asName, 'Level 3 Parent LLC');
+      expect(result.asDomain, 'level3.com');
+      expect(result.asUsageType, 'ISP');
+      expect(result.asCIDR, '8.3.32.0/20');
     });
     test('6to4 Google', () async {
       var ipl = IP2Location(databasePath: db26IPv4File);
@@ -295,10 +323,10 @@ void main() {
       expect(result.region, 'California');
       expect(result.city, 'Mountain View');
       expect(result.isp, 'Google LLC');
-      expect(result.latitude?.toStringAsFixed(6), '37.405991');
-      expect(result.longitude?.toStringAsFixed(6), '-122.078514');
+      expect(result.latitude?.toStringAsFixed(6), '37.386051');
+      expect(result.longitude?.toStringAsFixed(6), '-122.083847');
       expect(result.domain, 'google.com');
-      expect(result.zipCode, '94043');
+      expect(result.zipCode, '94035');
       expect(result.netSpeed, 'T1');
       expect(result.timeZone, '-07:00');
       expect(result.iddCode, '1');
@@ -312,9 +340,12 @@ void main() {
       expect(result.usageType, 'DCH');
       expect(result.addressType, 'A');
       expect(result.category, 'IAB19-11');
-      expect(result.district, 'San Diego County');
+      expect(result.district, 'Santa Clara County');
       expect(result.asn, '15169');
       expect(result.asName, 'Google LLC');
+      expect(result.asDomain, 'google.com');
+      expect(result.asUsageType, 'DCH');
+      expect(result.asCIDR, '8.8.8.0/24');
     });
   }, skip: 'Skipping 6to4 tests first.');
   group('Test Invalid IP', () {
@@ -322,121 +353,133 @@ void main() {
       var ipl = IP2Location(databasePath: db26IPv4File);
       var result = await ipl.getAll('0.0.0.256');
       expect(result.ipAddress, '0.0.0.256');
-      expect(result.countryShort, null);
-      expect(result.countryLong, null);
-      expect(result.region, null);
-      expect(result.city, null);
-      expect(result.isp, null);
+      expect(result.countryShort, 'Invalid IP address.');
+      expect(result.countryLong, 'Invalid IP address.');
+      expect(result.region, 'Invalid IP address.');
+      expect(result.city, 'Invalid IP address.');
+      expect(result.isp, 'Invalid IP address.');
       expect(result.latitude?.toStringAsFixed(6), null);
       expect(result.longitude?.toStringAsFixed(6), null);
-      expect(result.domain, null);
-      expect(result.zipCode, null);
-      expect(result.netSpeed, null);
-      expect(result.timeZone, null);
-      expect(result.iddCode, null);
-      expect(result.areaCode, null);
-      expect(result.weatherStationCode, null);
-      expect(result.weatherStationName, null);
-      expect(result.mcc, null);
-      expect(result.mnc, null);
-      expect(result.mobileBrand, null);
+      expect(result.domain, 'Invalid IP address.');
+      expect(result.zipCode, 'Invalid IP address.');
+      expect(result.netSpeed, 'Invalid IP address.');
+      expect(result.timeZone, 'Invalid IP address.');
+      expect(result.iddCode, 'Invalid IP address.');
+      expect(result.areaCode, 'Invalid IP address.');
+      expect(result.weatherStationCode, 'Invalid IP address.');
+      expect(result.weatherStationName, 'Invalid IP address.');
+      expect(result.mcc, 'Invalid IP address.');
+      expect(result.mnc, 'Invalid IP address.');
+      expect(result.mobileBrand, 'Invalid IP address.');
       expect(result.elevation, null);
-      expect(result.usageType, null);
-      expect(result.addressType, null);
-      expect(result.category, null);
-      expect(result.district, null);
-      expect(result.asn, null);
-      expect(result.asName, null);
+      expect(result.usageType, 'Invalid IP address.');
+      expect(result.addressType, 'Invalid IP address.');
+      expect(result.category, 'Invalid IP address.');
+      expect(result.district, 'Invalid IP address.');
+      expect(result.asn, 'Invalid IP address.');
+      expect(result.asName, 'Invalid IP address.');
+      expect(result.asDomain, 'Invalid IP address.');
+      expect(result.asUsageType, 'Invalid IP address.');
+      expect(result.asCIDR, 'Invalid IP address.');
     });
     test('Test Invalid 2', () async {
       var ipl = IP2Location(databasePath: db26IPv4File);
       var result = await ipl.getAll('0.0.0');
       expect(result.ipAddress, '0.0.0');
-      expect(result.countryShort, null);
-      expect(result.countryLong, null);
-      expect(result.region, null);
-      expect(result.city, null);
-      expect(result.isp, null);
+      expect(result.countryShort, 'Invalid IP address.');
+      expect(result.countryLong, 'Invalid IP address.');
+      expect(result.region, 'Invalid IP address.');
+      expect(result.city, 'Invalid IP address.');
+      expect(result.isp, 'Invalid IP address.');
       expect(result.latitude?.toStringAsFixed(6), null);
       expect(result.longitude?.toStringAsFixed(6), null);
-      expect(result.domain, null);
-      expect(result.zipCode, null);
-      expect(result.netSpeed, null);
-      expect(result.timeZone, null);
-      expect(result.iddCode, null);
-      expect(result.areaCode, null);
-      expect(result.weatherStationCode, null);
-      expect(result.weatherStationName, null);
-      expect(result.mcc, null);
-      expect(result.mnc, null);
-      expect(result.mobileBrand, null);
+      expect(result.domain, 'Invalid IP address.');
+      expect(result.zipCode, 'Invalid IP address.');
+      expect(result.netSpeed, 'Invalid IP address.');
+      expect(result.timeZone, 'Invalid IP address.');
+      expect(result.iddCode, 'Invalid IP address.');
+      expect(result.areaCode, 'Invalid IP address.');
+      expect(result.weatherStationCode, 'Invalid IP address.');
+      expect(result.weatherStationName, 'Invalid IP address.');
+      expect(result.mcc, 'Invalid IP address.');
+      expect(result.mnc, 'Invalid IP address.');
+      expect(result.mobileBrand, 'Invalid IP address.');
       expect(result.elevation, null);
-      expect(result.usageType, null);
-      expect(result.addressType, null);
-      expect(result.category, null);
-      expect(result.district, null);
-      expect(result.asn, null);
-      expect(result.asName, null);
+      expect(result.usageType, 'Invalid IP address.');
+      expect(result.addressType, 'Invalid IP address.');
+      expect(result.category, 'Invalid IP address.');
+      expect(result.district, 'Invalid IP address.');
+      expect(result.asn, 'Invalid IP address.');
+      expect(result.asName, 'Invalid IP address.');
+      expect(result.asDomain, 'Invalid IP address.');
+      expect(result.asUsageType, 'Invalid IP address.');
+      expect(result.asCIDR, 'Invalid IP address.');
     });
     test('Test Invalid 3', () async {
       var ipl = IP2Location(databasePath: db26IPv4File);
       var result = await ipl.getAll('1');
       expect(result.ipAddress, '1');
-      expect(result.countryShort, null);
-      expect(result.countryLong, null);
-      expect(result.region, null);
-      expect(result.city, null);
-      expect(result.isp, null);
+      expect(result.countryShort, 'Invalid IP address.');
+      expect(result.countryLong, 'Invalid IP address.');
+      expect(result.region, 'Invalid IP address.');
+      expect(result.city, 'Invalid IP address.');
+      expect(result.isp, 'Invalid IP address.');
       expect(result.latitude?.toStringAsFixed(6), null);
       expect(result.longitude?.toStringAsFixed(6), null);
-      expect(result.domain, null);
-      expect(result.zipCode, null);
-      expect(result.netSpeed, null);
-      expect(result.timeZone, null);
-      expect(result.iddCode, null);
-      expect(result.areaCode, null);
-      expect(result.weatherStationCode, null);
-      expect(result.weatherStationName, null);
-      expect(result.mcc, null);
-      expect(result.mnc, null);
-      expect(result.mobileBrand, null);
+      expect(result.domain, 'Invalid IP address.');
+      expect(result.zipCode, 'Invalid IP address.');
+      expect(result.netSpeed, 'Invalid IP address.');
+      expect(result.timeZone, 'Invalid IP address.');
+      expect(result.iddCode, 'Invalid IP address.');
+      expect(result.areaCode, 'Invalid IP address.');
+      expect(result.weatherStationCode, 'Invalid IP address.');
+      expect(result.weatherStationName, 'Invalid IP address.');
+      expect(result.mcc, 'Invalid IP address.');
+      expect(result.mnc, 'Invalid IP address.');
+      expect(result.mobileBrand, 'Invalid IP address.');
       expect(result.elevation, null);
-      expect(result.usageType, null);
-      expect(result.addressType, null);
-      expect(result.category, null);
-      expect(result.district, null);
-      expect(result.asn, null);
-      expect(result.asName, null);
+      expect(result.usageType, 'Invalid IP address.');
+      expect(result.addressType, 'Invalid IP address.');
+      expect(result.category, 'Invalid IP address.');
+      expect(result.district, 'Invalid IP address.');
+      expect(result.asn, 'Invalid IP address.');
+      expect(result.asName, 'Invalid IP address.');
+      expect(result.asDomain, 'Invalid IP address.');
+      expect(result.asUsageType, 'Invalid IP address.');
+      expect(result.asCIDR, 'Invalid IP address.');
     });
     test('Test Invalid 4', () async {
       var ipl = IP2Location(databasePath: db26IPv4File);
       var result = await ipl.getAll('A');
       expect(result.ipAddress, 'A');
-      expect(result.countryShort, null);
-      expect(result.countryLong, null);
-      expect(result.region, null);
-      expect(result.city, null);
-      expect(result.isp, null);
+      expect(result.countryShort, 'Invalid IP address.');
+      expect(result.countryLong, 'Invalid IP address.');
+      expect(result.region, 'Invalid IP address.');
+      expect(result.city, 'Invalid IP address.');
+      expect(result.isp, 'Invalid IP address.');
       expect(result.latitude?.toStringAsFixed(6), null);
       expect(result.longitude?.toStringAsFixed(6), null);
-      expect(result.domain, null);
-      expect(result.zipCode, null);
-      expect(result.netSpeed, null);
-      expect(result.timeZone, null);
-      expect(result.iddCode, null);
-      expect(result.areaCode, null);
-      expect(result.weatherStationCode, null);
-      expect(result.weatherStationName, null);
-      expect(result.mcc, null);
-      expect(result.mnc, null);
-      expect(result.mobileBrand, null);
+      expect(result.domain, 'Invalid IP address.');
+      expect(result.zipCode, 'Invalid IP address.');
+      expect(result.netSpeed, 'Invalid IP address.');
+      expect(result.timeZone, 'Invalid IP address.');
+      expect(result.iddCode, 'Invalid IP address.');
+      expect(result.areaCode, 'Invalid IP address.');
+      expect(result.weatherStationCode, 'Invalid IP address.');
+      expect(result.weatherStationName, 'Invalid IP address.');
+      expect(result.mcc, 'Invalid IP address.');
+      expect(result.mnc, 'Invalid IP address.');
+      expect(result.mobileBrand, 'Invalid IP address.');
       expect(result.elevation, null);
-      expect(result.usageType, null);
-      expect(result.addressType, null);
-      expect(result.category, null);
-      expect(result.district, null);
-      expect(result.asn, null);
-      expect(result.asName, null);
+      expect(result.usageType, 'Invalid IP address.');
+      expect(result.addressType, 'Invalid IP address.');
+      expect(result.category, 'Invalid IP address.');
+      expect(result.district, 'Invalid IP address.');
+      expect(result.asn, 'Invalid IP address.');
+      expect(result.asName, 'Invalid IP address.');
+      expect(result.asDomain, 'Invalid IP address.');
+      expect(result.asUsageType, 'Invalid IP address.');
+      expect(result.asCIDR, 'Invalid IP address.');
     });
   }, skip: 'Skipping Invalid IP tests first.');
   group('Test Individual Fields', () {
@@ -469,6 +512,9 @@ void main() {
       expect(result.district, notSupported);
       expect(result.asn, notSupported);
       expect(result.asName, notSupported);
+      expect(result.asDomain, notSupported);
+      expect(result.asUsageType, notSupported);
+      expect(result.asCIDR, notSupported);
     });
     test('Test Country Long', () async {
       var ipl = IP2Location(databasePath: db26IPv4File);
@@ -499,6 +545,9 @@ void main() {
       expect(result.district, notSupported);
       expect(result.asn, notSupported);
       expect(result.asName, notSupported);
+      expect(result.asDomain, notSupported);
+      expect(result.asUsageType, notSupported);
+      expect(result.asCIDR, notSupported);
     });
     test('Test Region', () async {
       var ipl = IP2Location(databasePath: db26IPv4File);
@@ -529,6 +578,9 @@ void main() {
       expect(result.district, notSupported);
       expect(result.asn, notSupported);
       expect(result.asName, notSupported);
+      expect(result.asDomain, notSupported);
+      expect(result.asUsageType, notSupported);
+      expect(result.asCIDR, notSupported);
     });
     test('Test City', () async {
       var ipl = IP2Location(databasePath: db26IPv4File);
@@ -559,6 +611,9 @@ void main() {
       expect(result.district, notSupported);
       expect(result.asn, notSupported);
       expect(result.asName, notSupported);
+      expect(result.asDomain, notSupported);
+      expect(result.asUsageType, notSupported);
+      expect(result.asCIDR, notSupported);
     });
     test('Test ISP', () async {
       var ipl = IP2Location(databasePath: db26IPv4File);
@@ -589,6 +644,9 @@ void main() {
       expect(result.district, notSupported);
       expect(result.asn, notSupported);
       expect(result.asName, notSupported);
+      expect(result.asDomain, notSupported);
+      expect(result.asUsageType, notSupported);
+      expect(result.asCIDR, notSupported);
     });
     test('Test Latitude', () async {
       var ipl = IP2Location(databasePath: db26IPv4File);
@@ -599,7 +657,7 @@ void main() {
       expect(result.region, notSupported);
       expect(result.city, notSupported);
       expect(result.isp, notSupported);
-      expect(result.latitude?.toStringAsFixed(6), '37.405991');
+      expect(result.latitude?.toStringAsFixed(6), '37.386051');
       expect(result.longitude?.toStringAsFixed(6), '0.000000');
       expect(result.domain, notSupported);
       expect(result.zipCode, notSupported);
@@ -619,6 +677,9 @@ void main() {
       expect(result.district, notSupported);
       expect(result.asn, notSupported);
       expect(result.asName, notSupported);
+      expect(result.asDomain, notSupported);
+      expect(result.asUsageType, notSupported);
+      expect(result.asCIDR, notSupported);
     });
     test('Test Longitude', () async {
       var ipl = IP2Location(databasePath: db26IPv4File);
@@ -630,7 +691,7 @@ void main() {
       expect(result.city, notSupported);
       expect(result.isp, notSupported);
       expect(result.latitude?.toStringAsFixed(6), '0.000000');
-      expect(result.longitude?.toStringAsFixed(6), '-122.078514');
+      expect(result.longitude?.toStringAsFixed(6), '-122.083847');
       expect(result.domain, notSupported);
       expect(result.zipCode, notSupported);
       expect(result.netSpeed, notSupported);
@@ -649,6 +710,9 @@ void main() {
       expect(result.district, notSupported);
       expect(result.asn, notSupported);
       expect(result.asName, notSupported);
+      expect(result.asDomain, notSupported);
+      expect(result.asUsageType, notSupported);
+      expect(result.asCIDR, notSupported);
     });
     test('Test Domain', () async {
       var ipl = IP2Location(databasePath: db26IPv4File);
@@ -679,6 +743,9 @@ void main() {
       expect(result.district, notSupported);
       expect(result.asn, notSupported);
       expect(result.asName, notSupported);
+      expect(result.asDomain, notSupported);
+      expect(result.asUsageType, notSupported);
+      expect(result.asCIDR, notSupported);
     });
     test('Test ZIP Code', () async {
       var ipl = IP2Location(databasePath: db26IPv4File);
@@ -692,7 +759,7 @@ void main() {
       expect(result.latitude?.toStringAsFixed(6), '0.000000');
       expect(result.longitude?.toStringAsFixed(6), '0.000000');
       expect(result.domain, notSupported);
-      expect(result.zipCode, '94043');
+      expect(result.zipCode, '94035');
       expect(result.netSpeed, notSupported);
       expect(result.timeZone, notSupported);
       expect(result.iddCode, notSupported);
@@ -709,6 +776,9 @@ void main() {
       expect(result.district, notSupported);
       expect(result.asn, notSupported);
       expect(result.asName, notSupported);
+      expect(result.asDomain, notSupported);
+      expect(result.asUsageType, notSupported);
+      expect(result.asCIDR, notSupported);
     });
     test('Test Net Speed', () async {
       var ipl = IP2Location(databasePath: db26IPv4File);
@@ -739,6 +809,9 @@ void main() {
       expect(result.district, notSupported);
       expect(result.asn, notSupported);
       expect(result.asName, notSupported);
+      expect(result.asDomain, notSupported);
+      expect(result.asUsageType, notSupported);
+      expect(result.asCIDR, notSupported);
     });
     test('Test Time Zone', () async {
       var ipl = IP2Location(databasePath: db26IPv4File);
@@ -769,6 +842,9 @@ void main() {
       expect(result.district, notSupported);
       expect(result.asn, notSupported);
       expect(result.asName, notSupported);
+      expect(result.asDomain, notSupported);
+      expect(result.asUsageType, notSupported);
+      expect(result.asCIDR, notSupported);
     });
     test('Test IDD Code', () async {
       var ipl = IP2Location(databasePath: db26IPv4File);
@@ -799,6 +875,9 @@ void main() {
       expect(result.district, notSupported);
       expect(result.asn, notSupported);
       expect(result.asName, notSupported);
+      expect(result.asDomain, notSupported);
+      expect(result.asUsageType, notSupported);
+      expect(result.asCIDR, notSupported);
     });
     test('Test Area Code', () async {
       var ipl = IP2Location(databasePath: db26IPv4File);
@@ -829,6 +908,9 @@ void main() {
       expect(result.district, notSupported);
       expect(result.asn, notSupported);
       expect(result.asName, notSupported);
+      expect(result.asDomain, notSupported);
+      expect(result.asUsageType, notSupported);
+      expect(result.asCIDR, notSupported);
     });
     test('Test Weather Station Code', () async {
       var ipl = IP2Location(databasePath: db26IPv4File);
@@ -859,6 +941,9 @@ void main() {
       expect(result.district, notSupported);
       expect(result.asn, notSupported);
       expect(result.asName, notSupported);
+      expect(result.asDomain, notSupported);
+      expect(result.asUsageType, notSupported);
+      expect(result.asCIDR, notSupported);
     });
     test('Test Weather Station Name', () async {
       var ipl = IP2Location(databasePath: db26IPv4File);
@@ -889,6 +974,9 @@ void main() {
       expect(result.district, notSupported);
       expect(result.asn, notSupported);
       expect(result.asName, notSupported);
+      expect(result.asDomain, notSupported);
+      expect(result.asUsageType, notSupported);
+      expect(result.asCIDR, notSupported);
     });
     test('Test MCC', () async {
       var ipl = IP2Location(databasePath: db26IPv4File);
@@ -919,6 +1007,9 @@ void main() {
       expect(result.district, notSupported);
       expect(result.asn, notSupported);
       expect(result.asName, notSupported);
+      expect(result.asDomain, notSupported);
+      expect(result.asUsageType, notSupported);
+      expect(result.asCIDR, notSupported);
     });
     test('Test MNC', () async {
       var ipl = IP2Location(databasePath: db26IPv4File);
@@ -949,6 +1040,9 @@ void main() {
       expect(result.district, notSupported);
       expect(result.asn, notSupported);
       expect(result.asName, notSupported);
+      expect(result.asDomain, notSupported);
+      expect(result.asUsageType, notSupported);
+      expect(result.asCIDR, notSupported);
     });
     test('Test Mobile Brand', () async {
       var ipl = IP2Location(databasePath: db26IPv4File);
@@ -979,6 +1073,9 @@ void main() {
       expect(result.district, notSupported);
       expect(result.asn, notSupported);
       expect(result.asName, notSupported);
+      expect(result.asDomain, notSupported);
+      expect(result.asUsageType, notSupported);
+      expect(result.asCIDR, notSupported);
     });
     test('Test Elevation', () async {
       var ipl = IP2Location(databasePath: db26IPv4File);
@@ -1009,6 +1106,9 @@ void main() {
       expect(result.district, notSupported);
       expect(result.asn, notSupported);
       expect(result.asName, notSupported);
+      expect(result.asDomain, notSupported);
+      expect(result.asUsageType, notSupported);
+      expect(result.asCIDR, notSupported);
     });
     test('Test Usage Type', () async {
       var ipl = IP2Location(databasePath: db26IPv4File);
@@ -1039,6 +1139,9 @@ void main() {
       expect(result.district, notSupported);
       expect(result.asn, notSupported);
       expect(result.asName, notSupported);
+      expect(result.asDomain, notSupported);
+      expect(result.asUsageType, notSupported);
+      expect(result.asCIDR, notSupported);
     });
     test('Test Address Type', () async {
       var ipl = IP2Location(databasePath: db26IPv4File);
@@ -1069,6 +1172,9 @@ void main() {
       expect(result.district, notSupported);
       expect(result.asn, notSupported);
       expect(result.asName, notSupported);
+      expect(result.asDomain, notSupported);
+      expect(result.asUsageType, notSupported);
+      expect(result.asCIDR, notSupported);
     });
     test('Test Category', () async {
       var ipl = IP2Location(databasePath: db26IPv4File);
@@ -1099,6 +1205,9 @@ void main() {
       expect(result.district, notSupported);
       expect(result.asn, notSupported);
       expect(result.asName, notSupported);
+      expect(result.asDomain, notSupported);
+      expect(result.asUsageType, notSupported);
+      expect(result.asCIDR, notSupported);
     });
     test('Test District', () async {
       var ipl = IP2Location(databasePath: db26IPv4File);
@@ -1126,9 +1235,12 @@ void main() {
       expect(result.usageType, notSupported);
       expect(result.addressType, notSupported);
       expect(result.category, notSupported);
-      expect(result.district, 'San Diego County');
+      expect(result.district, 'Santa Clara County');
       expect(result.asn, notSupported);
       expect(result.asName, notSupported);
+      expect(result.asDomain, notSupported);
+      expect(result.asUsageType, notSupported);
+      expect(result.asCIDR, notSupported);
     });
     test('Test ASN', () async {
       var ipl = IP2Location(databasePath: db26IPv4File);
@@ -1159,6 +1271,9 @@ void main() {
       expect(result.district, notSupported);
       expect(result.asn, '15169');
       expect(result.asName, notSupported);
+      expect(result.asDomain, notSupported);
+      expect(result.asUsageType, notSupported);
+      expect(result.asCIDR, notSupported);
     });
     test('Test AS Name', () async {
       var ipl = IP2Location(databasePath: db26IPv4File);
@@ -1189,6 +1304,108 @@ void main() {
       expect(result.district, notSupported);
       expect(result.asn, notSupported);
       expect(result.asName, 'Google LLC');
+      expect(result.asDomain, notSupported);
+      expect(result.asUsageType, notSupported);
+      expect(result.asCIDR, notSupported);
+    });
+    test('Test AS Domain', () async {
+      var ipl = IP2Location(databasePath: db26IPv4File);
+      var result = await ipl.getAsDomain('8.8.8.8');
+      expect(result.ipAddress, '8.8.8.8');
+      expect(result.countryShort, notSupported);
+      expect(result.countryLong, notSupported);
+      expect(result.region, notSupported);
+      expect(result.city, notSupported);
+      expect(result.isp, notSupported);
+      expect(result.latitude?.toStringAsFixed(6), '0.000000');
+      expect(result.longitude?.toStringAsFixed(6), '0.000000');
+      expect(result.domain, notSupported);
+      expect(result.zipCode, notSupported);
+      expect(result.netSpeed, notSupported);
+      expect(result.timeZone, notSupported);
+      expect(result.iddCode, notSupported);
+      expect(result.areaCode, notSupported);
+      expect(result.weatherStationCode, notSupported);
+      expect(result.weatherStationName, notSupported);
+      expect(result.mcc, notSupported);
+      expect(result.mnc, notSupported);
+      expect(result.mobileBrand, notSupported);
+      expect(result.elevation, 0.0);
+      expect(result.usageType, notSupported);
+      expect(result.addressType, notSupported);
+      expect(result.category, notSupported);
+      expect(result.district, notSupported);
+      expect(result.asn, notSupported);
+      expect(result.asName, notSupported);
+      expect(result.asDomain, 'google.com');
+      expect(result.asUsageType, notSupported);
+      expect(result.asCIDR, notSupported);
+    });
+    test('Test AS Usage Type', () async {
+      var ipl = IP2Location(databasePath: db26IPv4File);
+      var result = await ipl.getAsUsageType('8.8.8.8');
+      expect(result.ipAddress, '8.8.8.8');
+      expect(result.countryShort, notSupported);
+      expect(result.countryLong, notSupported);
+      expect(result.region, notSupported);
+      expect(result.city, notSupported);
+      expect(result.isp, notSupported);
+      expect(result.latitude?.toStringAsFixed(6), '0.000000');
+      expect(result.longitude?.toStringAsFixed(6), '0.000000');
+      expect(result.domain, notSupported);
+      expect(result.zipCode, notSupported);
+      expect(result.netSpeed, notSupported);
+      expect(result.timeZone, notSupported);
+      expect(result.iddCode, notSupported);
+      expect(result.areaCode, notSupported);
+      expect(result.weatherStationCode, notSupported);
+      expect(result.weatherStationName, notSupported);
+      expect(result.mcc, notSupported);
+      expect(result.mnc, notSupported);
+      expect(result.mobileBrand, notSupported);
+      expect(result.elevation, 0.0);
+      expect(result.usageType, notSupported);
+      expect(result.addressType, notSupported);
+      expect(result.category, notSupported);
+      expect(result.district, notSupported);
+      expect(result.asn, notSupported);
+      expect(result.asName, notSupported);
+      expect(result.asDomain, notSupported);
+      expect(result.asUsageType, 'DCH');
+      expect(result.asCIDR, notSupported);
+    });
+    test('Test AS CIDR', () async {
+      var ipl = IP2Location(databasePath: db26IPv4File);
+      var result = await ipl.getAsCidr('8.8.8.8');
+      expect(result.ipAddress, '8.8.8.8');
+      expect(result.countryShort, notSupported);
+      expect(result.countryLong, notSupported);
+      expect(result.region, notSupported);
+      expect(result.city, notSupported);
+      expect(result.isp, notSupported);
+      expect(result.latitude?.toStringAsFixed(6), '0.000000');
+      expect(result.longitude?.toStringAsFixed(6), '0.000000');
+      expect(result.domain, notSupported);
+      expect(result.zipCode, notSupported);
+      expect(result.netSpeed, notSupported);
+      expect(result.timeZone, notSupported);
+      expect(result.iddCode, notSupported);
+      expect(result.areaCode, notSupported);
+      expect(result.weatherStationCode, notSupported);
+      expect(result.weatherStationName, notSupported);
+      expect(result.mcc, notSupported);
+      expect(result.mnc, notSupported);
+      expect(result.mobileBrand, notSupported);
+      expect(result.elevation, 0.0);
+      expect(result.usageType, notSupported);
+      expect(result.addressType, notSupported);
+      expect(result.category, notSupported);
+      expect(result.district, notSupported);
+      expect(result.asn, notSupported);
+      expect(result.asName, notSupported);
+      expect(result.asDomain, notSupported);
+      expect(result.asUsageType, notSupported);
+      expect(result.asCIDR, '8.8.8.0/24');
     });
   }, skip: 'Skipping Individual Field tests first.');
 }

@@ -1,3 +1,9 @@
+## 8.1.0
+
+**Released on:** 2025-09-09
+
+- Added support for AS domain, AS usage type and AS CIDR.
+
 ## 8.0.1
 
 **Released on:** 2025-08-22

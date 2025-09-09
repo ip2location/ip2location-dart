@@ -9,8 +9,8 @@ project = 'IP2Location Dart'
 copyright = '2025, IP2Location'
 author = 'IP2Location'
 
-release = '8.0.0'
-version = '8.0.0'
+release = '8.1.0'
+version = '8.1.0'
 
 # -- General configuration
 

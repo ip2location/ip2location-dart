@@ -1,6 +1,6 @@
 import 'dart:core';
 
-final version = '8.0.1';
+final version = '8.1.0';
 
 final maxIPv4Range = BigInt.from(4294967295);
 final maxIPv6Range = BigInt.parse('340282366920938463463374607431768211455');

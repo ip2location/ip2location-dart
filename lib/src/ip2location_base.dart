@@ -35,6 +35,9 @@ enum _Fields {
   district,
   asn,
   asName,
+  asDomain,
+  asUsageType,
+  asCIDR,
 }
 
 /// The result field to return or all result fields.
@@ -64,6 +67,9 @@ enum _Modes {
   district,
   asn,
   asName,
+  asDomain,
+  asUsageType,
+  asCIDR,
   all,
 }
 
@@ -127,6 +133,9 @@ class IP2Location {
       _Fields.district: districtPosition,
       _Fields.asn: asnPosition,
       _Fields.asName: asPosition,
+      _Fields.asDomain: asDomainPosition,
+      _Fields.asUsageType: asUsageTypePosition,
+      _Fields.asCIDR: asCIDRPosition,
     };
     mapping.forEach((field, positionArray) {
       final pos = positionArray[dbType];
@@ -352,6 +361,18 @@ class IP2Location {
 
   Future<IPResult> getAsName(String? ipAddress) async {
     return await _query(ipAddress, mode: _Modes.asName);
+  }
+
+  Future<IPResult> getAsDomain(String? ipAddress) async {
+    return await _query(ipAddress, mode: _Modes.asDomain);
+  }
+
+  Future<IPResult> getAsUsageType(String? ipAddress) async {
+    return await _query(ipAddress, mode: _Modes.asUsageType);
+  }
+
+  Future<IPResult> getAsCidr(String? ipAddress) async {
+    return await _query(ipAddress, mode: _Modes.asCIDR);
   }
 
   /// Queries the BIN file based on [ipAddress] and [mode].
@@ -659,6 +680,30 @@ class IP2Location {
                   (mode == _Modes.all || mode == _Modes.asName)
               ? await readStr(
                   position: read32Row(row, _offsets[_Fields.asName]!),
+                  file: fileHandle,
+                )
+              : IPResult.notSupported;
+          record.asDomain =
+              _enabled[_Fields.asDomain]! &&
+                  (mode == _Modes.all || mode == _Modes.asDomain)
+              ? await readStr(
+                  position: read32Row(row, _offsets[_Fields.asDomain]!),
+                  file: fileHandle,
+                )
+              : IPResult.notSupported;
+          record.asUsageType =
+              _enabled[_Fields.asUsageType]! &&
+                  (mode == _Modes.all || mode == _Modes.asUsageType)
+              ? await readStr(
+                  position: read32Row(row, _offsets[_Fields.asUsageType]!),
+                  file: fileHandle,
+                )
+              : IPResult.notSupported;
+          record.asCIDR =
+              _enabled[_Fields.asCIDR]! &&
+                  (mode == _Modes.all || mode == _Modes.asCIDR)
+              ? await readStr(
+                  position: read32Row(row, _offsets[_Fields.asCIDR]!),
                   file: fileHandle,
                 )
               : IPResult.notSupported;

@@ -34,6 +34,9 @@ class IPResult {
   String? district;
   String? asn;
   String? asName;
+  String? asDomain;
+  String? asUsageType;
+  String? asCIDR;
 
   IPResult(this.ipAddress);
 
@@ -61,6 +64,9 @@ class IPResult {
     district = message;
     asn = message;
     asName = message;
+    asDomain = message;
+    asUsageType = message;
+    asCIDR = message;
   }
 
   @override
@@ -92,7 +98,10 @@ IPResult(
   category: $category,
   district: $district,
   asn: $asn,
-  asName: $asName
+  asName: $asName,
+  asDomain: $asDomain,
+  asUsageType: $asUsageType,
+  asCIDR: $asCIDR
 )''';
   }
 }

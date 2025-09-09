@@ -38,4 +38,7 @@ Future<void> main() async {
   print('district: ${result.district}');
   print('asn: ${result.asn}');
   print('asName: ${result.asName}');
+  print('asDomain: ${result.asDomain}');
+  print('asUsageType: ${result.asUsageType}');
+  print('asCIDR: ${result.asCIDR}');
 }
